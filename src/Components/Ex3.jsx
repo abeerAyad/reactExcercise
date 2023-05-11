@@ -4,12 +4,15 @@ const Todo = () => {
     const [todos, setTodos] = useState([]);
     const [descriptionTask, setDescriptionTask] = useState('');
     const handleTask = () => {
-        const tasks = {
-            id: todos.length + 1,
-            description: descriptionTask,
-        };
-        setTodos((prevTask) => [...prevTask, tasks]);
-        setDescriptionTask('');
+        if(descriptionTask) {
+            const tasks = {
+                id: todos.length + 1,
+                description: descriptionTask,
+            };
+            setTodos((prevTask) => [...prevTask, tasks]);
+            setDescriptionTask('');
+        }
+        
     };
 
     const deleteTask = (id) => {
