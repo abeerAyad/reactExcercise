@@ -8,14 +8,13 @@ const SignUp = () => {
     const [error, setError] = useState('');
 
     const handleInput = () => {
-        if (email === '' || password === '') {
-            setError("Email and password can't be empty");
-        } else if (password !== confirmPass) {
-            setError("Passwords don't match");
-        } else {
-            setError('');
-            setText({ email, password });
-        }
+        (email === '' || password === '')
+        ? setError("Email and password can't be empty")
+        : (password !== confirmPass) 
+        ? setError("Passwords don't match")
+        : setError('')
+          setText({ email, password })
+        
     }
 
     const handleDelete = () => {
