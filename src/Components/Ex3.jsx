@@ -1,28 +1,22 @@
-// import { useState } from "react";
+import { useState } from "react"
 
-// const Ex3 = () => {
-//     const [todo, setTodo] = useState([]);
-//     const taskContent =
-//         todo.map((task) => {
-//             <div className="task">
-//                 <h4>{task.desc}</h4>
-//                 <button>Delete</button>
-//             </div>
-//         })
+const Todo = () => {
+    const [task, setTask] = useState('');
+    const handleTask =() => {
+        setTask(task)
+    }
 
-//     const addTask = () => {
+    return (
+        <>
+        <input
+         type="text" 
+         placeholder="enter your task"
+         onChange={(e) => setTask(e.target.value)}
+         required
+         />
+         <button type="button" onClick={handleTask}>Add</button>
+        {<div>{task}</div>}
+        </>
 
-
-//     }
-
-
-//     return (
-//         <div className="form">
-//             <input onChange={(e) => setTodo(e.target.value)} value={todo} type="text" placeholder="Enter Your Task" />
-//             <button>Add</button>
-//             <div className="todo-tasks"> {taskContent}</div>
-//         </div>
-//     )
-// }
-
-// export default Ex3;
+    )
+}

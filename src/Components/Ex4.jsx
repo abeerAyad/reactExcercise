@@ -1,61 +1,74 @@
-import { useState } from "react"
+import { useState } from "react";
 
 const SignUp = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPass, setConfirmPass] = useState('');
-    const [text, setText] = useState('');
-    const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [showUserData, setShowUserData] = useState(false);
 
-    const handleInput = () => {
-        (email === '' || password === '')
-        ? setError("Email and password can't be empty")
-        : (password !== confirmPass) 
-        ? setError("Passwords don't match")
-        : setError('')
-          setText({ email, password })
-        
+  const handleInput = (e) => {
+    e.preventDefault();
+
+    if (!email || !password || !confirmPassword) {
+      setError("Fill All Fields");
+      return;
+    }
+    if (password !== confirmPassword) {
+        setError("Passwords must be a match");
+      return;
     }
 
-    const handleDelete = () => {
-        setText('');
-    }
+    setError("");
+    setShowUserData(true);
+  };
 
-    return (
+  const handleDelete = () => {
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setError("");
+    setShowUserData(false);
+  };
+
+  return (
+    <form>
+      <input
+        type="email"
+        placeholder="Enter your email"
+        name="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+
+      <input
+        type="password"
+        placeholder="Enter your password"
+        name="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <input
+        type="password"
+        placeholder="Confirm password"
+        name="confirmPassword"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+      />
+
+      <button onClick={handleInput}>Sign Up</button>
+
+      {error && <div>{error}</div>}
+      {showUserData && (
         <div>
-            <input
-                type='email'
-                placeholder="Enter your email"
-                onChange={(e) => setEmail(e.target.value)}
-                required
-            />
-
-            <input
-                type="password"
-                placeholder="Enter your password"
-                onChange={(e) => setPassword(e.target.value)}
-                required
-            />
-
-            <input
-                type="password"
-                placeholder="Confirm password"
-                onChange={(e) => setConfirmPass(e.target.value)}
-                required
-            />
-
-            <button type='button' onClick={handleInput}>Sign Up</button>
-
-            {error && <div>{error}</div>}
-            {!error && text.email && (
-                <div>
-                    <h2>{text.email}</h2>
-                    <h3>{text.password}</h3>
-                    <button onClick={handleDelete}>Delete</button>
-                </div>
-            )}
+          <h2>{email}</h2>
+          <h3>{password}</h3>
+          <button onSubmit={handleDelete}>Delete</button>
         </div>
-    );
-}
+      )}
+    </form>
+  );
+};
 
 export default SignUp;
