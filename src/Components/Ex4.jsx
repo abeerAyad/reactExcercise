@@ -16,11 +16,10 @@ const SignUp = () => {
             setError('');
             setText({ email, password });
         }
-        
     }
 
     const handleDelete = () => {
-        setText('')
+        setText('');
     }
 
     return (
@@ -36,18 +35,20 @@ const SignUp = () => {
                 type="password"
                 placeholder="Enter your password"
                 onChange={(e) => setPassword(e.target.value)}
+                required
             />
 
             <input
                 type="password"
                 placeholder="Confirm password"
                 onChange={(e) => setConfirmPass(e.target.value)}
+                required
             />
 
             <button type='button' onClick={handleInput}>Sign Up</button>
 
             {error && <div>{error}</div>}
-            {!error && (
+            {!error && text.email && (
                 <div>
                     <h2>{text.email}</h2>
                     <h3>{text.password}</h3>
