@@ -7,7 +7,7 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const [showUserData, setShowUserData] = useState(false);
 
-  const handleInput = (e) => {
+    const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!email || !password || !confirmPassword) {
@@ -57,7 +57,7 @@ const SignUp = () => {
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
 
-      <button onClick={handleInput}>Sign Up</button>
+      <button onClick={handleSubmit}>Sign Up</button>
 
       {error && <div>{error}</div>}
       {showUserData && (
